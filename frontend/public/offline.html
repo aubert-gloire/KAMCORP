@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Offline - KAMCORP</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: linear-gradient(135deg, #0f0f13 0%, #1b1b1f 100%);
+      color: #e5e5e7;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      text-align: center;
+      max-width: 500px;
+    }
+
+    .icon {
+      width: 120px;
+      height: 120px;
+      margin: 0 auto 30px;
+      background: linear-gradient(135deg, #4c1d95 0%, #1e1b4b 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 60px;
+      font-weight: bold;
+      color: white;
+      box-shadow: 0 10px 40px rgba(139, 92, 246, 0.3);
+    }
+
+    h1 {
+      font-size: 32px;
+      margin-bottom: 15px;
+      background: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    p {
+      color: #9ca3af;
+      font-size: 16px;
+      line-height: 1.6;
+      margin-bottom: 30px;
+    }
+
+    .retry-btn {
+      background: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%);
+      color: white;
+      border: none;
+      padding: 14px 32px;
+      font-size: 16px;
+      font-weight: 600;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 20px rgba(139, 92, 246, 0.4);
+    }
+
+    .retry-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 30px rgba(139, 92, 246, 0.6);
+    }
+
+    .retry-btn:active {
+      transform: translateY(0);
+    }
+
+    .status {
+      margin-top: 20px;
+      padding: 12px 20px;
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      border-radius: 8px;
+      color: #fca5a5;
+      font-size: 14px;
+    }
+
+    .online .status {
+      background: rgba(16, 185, 129, 0.1);
+      border-color: rgba(16, 185, 129, 0.3);
+      color: #6ee7b7;
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        opacity: 1;
+      }
+      50% {
+        opacity: 0.5;
+      }
+    }
+
+    .checking {
+      animation: pulse 2s ease-in-out infinite;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="icon">K</div>
+    <h1>You're Offline</h1>
+    <p>
+      It looks like you've lost your internet connection. 
+      Don't worry, we'll automatically reconnect when you're back online.
+    </p>
+    <button class="retry-btn" onclick="retryConnection()">
+      Retry Connection
+    </button>
+    <div class="status" id="status">
+      📡 No internet connection detected
+    </div>
+  </div>
+
+  <script>
+    let isChecking = false;
+
+    function updateStatus(message, isOnline = false) {
+      const status = document.getElementById('status');
+      status.textContent = message;
+      status.className = 'status' + (isOnline ? ' online' : '');
+    }
+
+    function retryConnection() {
+      if (isChecking) return;
+      
+      isChecking = true;
+      const status = document.getElementById('status');
+      status.classList.add('checking');
+      updateStatus('🔄 Checking connection...');
+
+      fetch('/', { method: 'HEAD', cache: 'no-store' })
+        .then(() => {
+          updateStatus('✅ Connection restored! Redirecting...', true);
+          setTimeout(() => {
+            window.location.href = '/';
+          }, 1000);
+        })
+        .catch(() => {
+          updateStatus('❌ Still offline. Please check your connection.');
+          status.classList.remove('checking');
+          isChecking = false;
+        });
+    }
+
+    // Auto-check connection every 10 seconds
+    setInterval(() => {
+      if (!isChecking && navigator.onLine) {
+        retryConnection();
+      }
+    }, 10000);
+
+    // Listen for online event
+    window.addEventListener('online', () => {
+      updateStatus('✅ Connection restored! Redirecting...', true);
+      setTimeout(() => {
+        window.location.href = '/';
+      }, 1000);
+    });
+
+    window.addEventListener('offline', () => {
+      updateStatus('📡 No internet connection detected');
+    });
+  </script>
+</body>
+</html>

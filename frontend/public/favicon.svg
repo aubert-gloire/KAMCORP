@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4c1d95;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1e1b4b;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background circle with gradient -->
+  <circle cx="50" cy="50" r="48" fill="url(#grad)"/>
+  
+  <!-- K - Bold white capital letter -->
+  <g fill="white">
+    <rect x="20" y="25" width="7" height="50"/>
+    <polygon points="27,47 42,25 49,25 34,47"/>
+    <polygon points="34,50 49,75 42,75 27,50"/>
+  </g>
+  
+  <!-- C - Bold white capital letter -->
+  <g fill="white">
+    <path d="M 65 28 Q 55 25 55 35 L 55 65 Q 55 75 65 72 L 65 64 Q 62 65 62 62 L 62 38 Q 62 35 65 36 Z"/>
+    <path d="M 65 36 L 75 36 Q 80 36 80 42 L 73 42 Q 73 40 71 40 L 65 40 L 65 36 Z"/>
+    <path d="M 65 64 L 75 64 Q 80 64 80 58 L 73 58 Q 73 60 71 60 L 65 60 L 65 64 Z"/>
+  </g>
+</svg>

@@ -181,40 +181,40 @@ export default function NotificationDropdown() {
           <>
             <div className="fixed inset-0 z-10" onClick={() => setIsOpen(false)} />
             <motion.div
-              className="absolute right-0 mt-2 w-80 bg-surface border border-border rounded-xl shadow-metallic overflow-hidden z-20"
+              className="absolute right-0 mt-2 w-[calc(100vw-2rem)] sm:w-96 max-w-md bg-surface border border-border rounded-xl shadow-metallic overflow-hidden z-20"
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
             >
               {/* Header */}
-              <div className="p-3 border-b border-border flex items-center justify-between">
+              <div className="p-3 sm:p-4 border-b border-border flex items-center justify-between">
                 <h3 className="text-sm font-semibold text-text-primary">Notifications</h3>
                 {unreadCount > 0 && (
                   <button
                     onClick={() => markAllAsReadMutation.mutate()}
-                    className="text-xs text-accent-primary hover:text-accent-primary-hover transition-colors"
+                    className="text-xs text-accent-primary hover:text-accent-primary-hover transition-colors whitespace-nowrap"
                   >
-                    Mark all as read
+                    Mark all read
                   </button>
                 )}
               </div>
 
               {/* Notification list */}
-              <div className="max-h-96 overflow-y-auto custom-scrollbar">
+              <div className="max-h-[60vh] sm:max-h-96 overflow-y-auto custom-scrollbar">
                 {isLoading ? (
-                  <div className="p-8 text-center">
+                  <div className="p-6 sm:p-8 text-center">
                     <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-accent-primary"></div>
                     <p className="text-sm text-text-secondary mt-2">Loading notifications...</p>
                   </div>
                 ) : error ? (
-                  <div className="p-8 text-center">
+                  <div className="p-6 sm:p-8 text-center">
                     <svg className="w-12 h-12 text-error mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                     <p className="text-sm text-error">Failed to load notifications</p>
                   </div>
                 ) : notifications.length === 0 ? (
-                  <div className="p-8 text-center">
+                  <div className="p-6 sm:p-8 text-center">
                     <svg className="w-12 h-12 text-text-tertiary mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
                     </svg>
@@ -225,7 +225,7 @@ export default function NotificationDropdown() {
                     <motion.button
                       key={notification._id}
                       onClick={() => handleNotificationClick(notification)}
-                      className={`w-full p-3 flex gap-3 hover:bg-surface-hover transition-colors text-left ${
+                      className={`w-full p-3 sm:p-4 flex gap-2 sm:gap-3 hover:bg-surface-hover transition-colors text-left ${
                         !notification.isRead ? 'bg-accent-primary/5' : ''
                       } ${index !== notifications.length - 1 ? 'border-b border-border' : ''}`}
                       initial={{ opacity: 0, x: -20 }}
@@ -235,17 +235,17 @@ export default function NotificationDropdown() {
                       {getNotificationIcon(notification.type)}
                       <div className="flex-1 min-w-0">
                         <div className="flex items-start justify-between gap-2">
-                          <p className="text-sm font-medium text-text-primary line-clamp-1">
+                          <p className="text-xs sm:text-sm font-medium text-text-primary line-clamp-1">
                             {notification.title}
                           </p>
                           {!notification.isRead && (
-                            <div className="w-2 h-2 bg-accent-primary rounded-full flex-shrink-0 mt-1.5" />
+                            <div className="w-2 h-2 bg-accent-primary rounded-full flex-shrink-0 mt-1 sm:mt-1.5" />
                           )}
                         </div>
                         <p className="text-xs text-text-secondary line-clamp-2 mt-0.5">
                           {notification.message}
                         </p>
-                        <p className="text-xs text-text-tertiary mt-1">
+                        <p className="text-[10px] sm:text-xs text-text-tertiary mt-1">
                           {formatTime(notification.createdAt)}
                         </p>
                       </div>

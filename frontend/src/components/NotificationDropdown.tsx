@@ -181,7 +181,7 @@ export default function NotificationDropdown() {
           <>
             <div className="fixed inset-0 z-10" onClick={() => setIsOpen(false)} />
             <motion.div
-              className="absolute right-0 mt-2 w-[calc(100vw-2rem)] sm:w-96 max-w-md bg-surface border border-border rounded-xl shadow-metallic overflow-hidden z-20"
+              className="fixed sm:absolute left-4 right-4 sm:left-auto sm:right-0 top-16 sm:top-auto mt-0 sm:mt-2 w-auto sm:w-96 max-w-md bg-surface border border-border rounded-xl shadow-metallic overflow-hidden z-20"
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}

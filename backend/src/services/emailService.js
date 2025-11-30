@@ -1,35 +1,27 @@
-import nodemailer from 'nodemailer';
+import * as brevo from '@getbrevo/brevo';
 import { config } from '../config/env.js';
 
-// Create Gmail transporter
-const createTransporter = () => {
-  const gmailUser = process.env.GMAIL_USER;
-  const gmailAppPassword = process.env.GMAIL_APP_PASSWORD;
+// Initialize Brevo API client
+const brevoApiInstance = new brevo.TransactionalEmailsApi();
+const brevoApiKey = brevoApiInstance.authentications['apiKey'];
+brevoApiKey.apiKey = process.env.BREVO_API_KEY;
 
-  if (!gmailUser || !gmailAppPassword) {
-    console.warn('⚠️  Gmail credentials not configured. 2FA codes will be logged to console.');
-    return null;
-  }
+const isBrevoConfigured = !!process.env.BREVO_API_KEY;
+const senderEmail = process.env.BREVO_SENDER_EMAIL || 'noreply@kamcorp.com';
+const senderName = process.env.BREVO_SENDER_NAME || 'KAMCORP';
 
-  return nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-      user: gmailUser,
-      pass: gmailAppPassword,
-    },
-  });
-};
-
-const transporter = createTransporter();
+if (!isBrevoConfigured) {
+  console.warn('⚠️  Brevo API key not configured. 2FA codes will be logged to console.');
+}
 
 /**
  * Send 2FA verification code email
  */
 export const send2FACode = async (email, code, userName) => {
   try {
-    // If no transporter configured, log the code to console (development mode)
-    if (!transporter) {
-      console.log('\n🔑 2FA CODE (Gmail not configured - using console):');
+    // If no Brevo API configured, log the code to console (development mode)
+    if (!isBrevoConfigured) {
+      console.log('\n🔑 2FA CODE (Brevo not configured - using console):');
       console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
       console.log(`📧 To: ${email}`);
       console.log(`👤 User: ${userName}`);
@@ -39,11 +31,7 @@ export const send2FACode = async (email, code, userName) => {
       return true; // Simulate success
     }
 
-    const mailOptions = {
-      from: `"KAMCORP" <${process.env.GMAIL_USER}>`,
-      to: email,
-      subject: 'Your KAMCORP Login Verification Code',
-      html: `
+    const htmlContent = `
         <!DOCTYPE html>
         <html>
           <head>
@@ -106,11 +94,16 @@ export const send2FACode = async (email, code, userName) => {
             </table>
           </body>
         </html>
-      `,
-    };
+      `;
 
-    const info = await transporter.sendMail(mailOptions);
-    console.log('✅ 2FA email sent successfully:', info.messageId);
+    const sendSmtpEmail = new brevo.SendSmtpEmail();
+    sendSmtpEmail.sender = { name: senderName, email: senderEmail };
+    sendSmtpEmail.to = [{ email: email, name: userName }];
+    sendSmtpEmail.subject = 'Your KAMCORP Login Verification Code';
+    sendSmtpEmail.htmlContent = htmlContent;
+
+    const response = await brevoApiInstance.sendTransacEmail(sendSmtpEmail);
+    console.log('✅ 2FA email sent successfully via Brevo:', response.messageId);
     return true;
   } catch (error) {
     console.error('❌ Send 2FA email error:', error);

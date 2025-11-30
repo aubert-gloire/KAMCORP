@@ -119,27 +119,27 @@ export default function Verify2FA() {
         transition={{ duration: 0.5 }}
       >
         {/* Logo */}
-        <div className="text-center mb-8">
-          <div className="w-24 h-24 mx-auto mb-4">
+        <div className="text-center mb-6 sm:mb-8">
+          <div className="w-20 h-20 sm:w-24 sm:h-24 mx-auto mb-3 sm:mb-4">
             <img src="/logo.svg" alt="KAMCORP Logo" className="w-full h-full object-contain" />
           </div>
-          <h1 className="text-2xl font-display font-bold text-text-primary mb-2">
+          <h1 className="text-xl sm:text-2xl font-display font-bold text-text-primary mb-2 px-4">
             Two-Factor Authentication
           </h1>
-          <p className="text-text-secondary text-sm">
+          <p className="text-text-secondary text-xs sm:text-sm px-4">
             We've sent a 6-digit code to your email
           </p>
         </div>
 
         {/* Verification Card */}
-        <div className="bg-surface rounded-xl p-8 border border-border shadow-metallic">
-          <form onSubmit={handleSubmit} className="space-y-6">
+        <div className="bg-surface rounded-xl p-4 sm:p-8 border border-border shadow-metallic">
+          <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
             {/* Code Inputs */}
             <div>
-              <label className="block text-sm font-medium text-text-primary mb-4 text-center">
+              <label className="block text-xs sm:text-sm font-medium text-text-primary mb-3 sm:mb-4 text-center">
                 Enter Verification Code
               </label>
-              <div className="flex gap-3 justify-center" onPaste={handlePaste}>
+              <div className="flex gap-2 sm:gap-3 justify-center" onPaste={handlePaste}>
                 {code.map((digit, index) => (
                   <input
                     key={index}
@@ -152,7 +152,7 @@ export default function Verify2FA() {
                     value={digit}
                     onChange={(e) => handleChange(index, e.target.value)}
                     onKeyDown={(e) => handleKeyDown(index, e)}
-                    className="w-14 h-14 text-center text-2xl font-bold bg-background border-2 border-border rounded-lg focus:border-accent-primary focus:outline-none transition-colors text-text-primary"
+                    className="w-10 h-10 sm:w-14 sm:h-14 text-center text-xl sm:text-2xl font-bold bg-background border-2 border-border rounded-lg focus:border-accent-primary focus:outline-none transition-colors text-text-primary"
                     autoFocus={index === 0}
                   />
                 ))}

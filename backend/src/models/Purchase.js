@@ -6,6 +6,10 @@ const purchaseSchema = new mongoose.Schema({
     ref: 'Product',
     required: [true, 'Product ID is required']
   },
+  productSnapshot: {
+    name: { type: String, required: true },
+    sku: { type: String, required: true }
+  },
   quantityPurchased: {
     type: Number,
     required: [true, 'Quantity purchased is required'],

@@ -39,6 +39,10 @@ interface Purchase {
     _id: string;
     name: string;
     sku: string;
+  } | null;
+  productSnapshot: {
+    name: string;
+    sku: string;
   };
   quantity: number;
   costPrice: number;
@@ -367,10 +371,10 @@ export default function Purchases() {
                       })}
                     </td>
                     <td className="py-3 px-4 text-sm text-text-primary font-medium">
-                      {purchase.product.name}
+                      {purchase.productSnapshot?.name || (purchase.product?.name) || '[Deleted Product]'}
                     </td>
                     <td className="py-3 px-4 text-sm text-text-secondary">
-                      {purchase.product.sku}
+                      {purchase.productSnapshot?.sku || (purchase.product?.sku) || 'N/A'}
                     </td>
                     <td className="py-3 px-4 text-sm text-text-primary text-right">
                       {purchase.quantity}

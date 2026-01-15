@@ -52,6 +52,10 @@ export const getPurchases = async (req, res) => {
       data: purchases.map(purchase => ({
         _id: purchase._id,
         product: purchase.productId,
+        productSnapshot: purchase.productSnapshot || (purchase.productId ? {
+          name: purchase.productId.name,
+          sku: purchase.productId.sku
+        } : { name: '[Deleted Product]', sku: 'N/A' }),
         quantity: purchase.quantityPurchased,
         costPrice: purchase.unitCostTZS,
         totalCost: purchase.totalCostTZS,
@@ -164,6 +168,10 @@ export const createPurchase = async (req, res) => {
     // Create purchase
     const purchase = await Purchase.create([{
       productId,
+      productSnapshot: {
+        name: product.name,
+        sku: product.sku
+      },
       quantityPurchased,
       unitCostTZS,
       totalCostTZS,

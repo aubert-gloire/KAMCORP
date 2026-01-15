@@ -567,11 +567,15 @@ export default function Purchases() {
             <div className="p-4 bg-surface rounded-xl border border-border">
               <div className="flex justify-between text-sm mb-2">
                 <span className="text-text-secondary">Product:</span>
-                <span className="text-text-primary font-medium">{selectedPurchase.product.name}</span>
+                <span className="text-text-primary font-medium">
+                  {selectedPurchase.productSnapshot?.name || selectedPurchase.product?.name || '[Deleted Product]'}
+                </span>
               </div>
               <div className="flex justify-between text-sm">
                 <span className="text-text-secondary">SKU:</span>
-                <span className="text-text-secondary">{selectedPurchase.product.sku}</span>
+                <span className="text-text-secondary">
+                  {selectedPurchase.productSnapshot?.sku || selectedPurchase.product?.sku || 'N/A'}
+                </span>
               </div>
             </div>
 
@@ -668,7 +672,9 @@ export default function Purchases() {
             <div className="p-4 bg-surface rounded-xl border border-border space-y-2">
               <div className="flex justify-between text-sm">
                 <span className="text-text-secondary">Product:</span>
-                <span className="text-text-primary font-medium">{selectedPurchase.product.name}</span>
+                <span className="text-text-primary font-medium">
+                  {selectedPurchase.productSnapshot?.name || selectedPurchase.product?.name || '[Deleted Product]'}
+                </span>
               </div>
               <div className="flex justify-between text-sm">
                 <span className="text-text-secondary">Quantity:</span>

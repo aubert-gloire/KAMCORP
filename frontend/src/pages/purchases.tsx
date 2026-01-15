@@ -77,6 +77,9 @@ export default function Purchases() {
   });
   const [errors, setErrors] = useState<Partial<Record<keyof PurchaseFormData, string>>>({});
   const [selectedProductId, setSelectedProductId] = useState('');
+  const [startDate, setStartDate] = useState('');
+  const [endDate, setEndDate] = useState('');
+  const [showFilters, setShowFilters] = useState(false);
 
   const canCreatePurchase = isAdmin() || isStock();
 
@@ -91,9 +94,12 @@ export default function Purchases() {
 
   // Fetch purchases
   const { data: purchases = [], isLoading } = useQuery<Purchase[]>({
-    queryKey: ['purchases'],
+    queryKey: ['purchases', startDate, endDate],
     queryFn: async () => {
-      const response = await api.get('/purchases');
+      const params = new URLSearchParams();
+      if (startDate) params.append('startDate', startDate);
+      if (endDate) params.append('endDate', endDate);
+      const response = await api.get(`/purchases?${params.toString()}`);
       return response.data.data;
     },
   });
@@ -262,6 +268,78 @@ export default function Purchases() {
           </Button>
         )}
       </div>
+
+      {/* Date Filters */}
+      <Card>
+        <CardContent className="p-4">
+          <div className="flex items-center justify-between mb-4">
+            <button
+              onClick={() => setShowFilters(!showFilters)}
+              className="flex items-center gap-2 text-accent-primary hover:text-accent-primary/80 transition-colors"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
+              </svg>
+              <span className="font-medium">{showFilters ? 'Hide' : 'Show'} Date Filters</span>
+            </button>
+            {(startDate || endDate) && (
+              <button
+                onClick={() => {
+                  setStartDate('');
+                  setEndDate('');
+                }}
+                className="text-sm text-text-secondary hover:text-error transition-colors"
+              >
+                Clear Filters
+              </button>
+            )}
+          </div>
+          
+          {showFilters && (
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <Input
+                label="Start Date"
+                type="date"
+                value={startDate}
+                onChange={(e) => setStartDate(e.target.value)}
+              />
+              <Input
+                label="End Date"
+                type="date"
+                value={endDate}
+                onChange={(e) => setEndDate(e.target.value)}
+              />
+              <div className="flex items-end gap-2">
+                <Button
+                  variant="secondary"
+                  onClick={() => {
+                    const today = new Date();
+                    const lastMonth = new Date(today.getFullYear(), today.getMonth() - 1, 1);
+                    const lastMonthEnd = new Date(today.getFullYear(), today.getMonth(), 0);
+                    setStartDate(lastMonth.toISOString().split('T')[0]);
+                    setEndDate(lastMonthEnd.toISOString().split('T')[0]);
+                  }}
+                  className="flex-1"
+                >
+                  Last Month
+                </Button>
+                <Button
+                  variant="secondary"
+                  onClick={() => {
+                    const today = new Date();
+                    const firstDayOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+                    setStartDate(firstDayOfMonth.toISOString().split('T')[0]);
+                    setEndDate(today.toISOString().split('T')[0]);
+                  }}
+                  className="flex-1"
+                >
+                  This Month
+                </Button>
+              </div>
+            </div>
+          )}
+        </CardContent>
+      </Card>
 
       {/* Summary Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">

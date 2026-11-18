@@ -15,7 +15,7 @@ export default function Navbar({ onMenuClick }: NavbarProps) {
 
   return (
     <nav className="sticky top-0 z-40 bg-surface border-b border-border shadow-card">
-      <div className="flex items-center justify-between h-16 px-4 md:px-6">
+      <div className="flex items-center justify-between h-12 px-4 md:px-6">
         {/* Left side - Menu button and Logo */}
         <div className="flex items-center gap-4">
           <button
@@ -28,10 +28,10 @@ export default function Navbar({ onMenuClick }: NavbarProps) {
           </button>
           
           <div className="flex items-center gap-3">
-            <div className="w-20 h-20 flex items-center justify-center">
+            <div className="w-7 h-7 flex items-center justify-center">
               <img src="/logo.svg" alt="KAMCORP Logo" className="w-full h-full object-contain" />
             </div>
-            <h1 className="text-xl font-display font-semibold text-gradient hidden sm:block">
+            <h1 className="text-xl font-display font-bold text-gradient hidden sm:block tracking-tight">
               KAMCORP
             </h1>
           </div>
@@ -39,22 +39,31 @@ export default function Navbar({ onMenuClick }: NavbarProps) {
 
         {/* Right side - Theme toggle, Notifications, and User menu */}
         <div className="flex items-center gap-3">
-          {/* Theme toggle */}
-          <button
-            onClick={toggleTheme}
-            className="text-text-secondary hover:text-text-primary transition-colors p-2 rounded-lg hover:bg-surface-hover"
-            title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
-          >
-            {theme === 'dark' ? (
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-              </svg>
-            ) : (
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-              </svg>
-            )}
-          </button>
+          {/* Theme toggle — pill switch */}
+          <div className="flex items-center gap-1.5" title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
+            {/* Sun icon */}
+            <svg className={`w-3.5 h-3.5 transition-colors ${theme === 'light' ? 'text-warning' : 'text-text-tertiary'}`} fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm0 15a5 5 0 100-10 5 5 0 000 10zm7-5a1 1 0 011-1h1a1 1 0 110 2h-1a1 1 0 01-1-1zM3 12a1 1 0 011-1h1a1 1 0 110 2H4a1 1 0 01-1-1zm15.364-6.364a1 1 0 010 1.414l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 0zM6.343 17.657a1 1 0 010 1.414l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 0zM21 20a1 1 0 01-1 1h-1a1 1 0 110-2h1a1 1 0 011 1zM12 20a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.636 5.636a1 1 0 011.414 0l.707.707A1 1 0 016.343 7.757l-.707-.707a1 1 0 010-1.414z"/>
+            </svg>
+            <button
+              onClick={toggleTheme}
+              className={`relative inline-flex h-5 w-9 flex-shrink-0 items-center rounded-full border transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 focus:ring-offset-background ${
+                theme === 'dark'
+                  ? 'bg-accent-primary/20 border-accent-primary/40'
+                  : 'bg-surface-hover border-border'
+              }`}
+            >
+              <span
+                className={`inline-block h-3.5 w-3.5 transform rounded-full bg-accent-primary shadow transition-transform duration-300 ${
+                  theme === 'dark' ? 'translate-x-4' : 'translate-x-0.5'
+                }`}
+              />
+            </button>
+            {/* Moon icon */}
+            <svg className={`w-3.5 h-3.5 transition-colors ${theme === 'dark' ? 'text-accent-primary' : 'text-text-tertiary'}`} fill="currentColor" viewBox="0 0 24 24">
+              <path d="M21 12.79A9 9 0 1111.21 3a7 7 0 109.79 9.79z"/>
+            </svg>
+          </div>
 
           {/* Notifications */}
           <NotificationDropdown />
@@ -64,8 +73,8 @@ export default function Navbar({ onMenuClick }: NavbarProps) {
               onClick={() => setShowUserMenu(!showUserMenu)}
               className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-surface-hover transition-colors"
             >
-              <div className="w-8 h-8 bg-accent-primary rounded-full flex items-center justify-center">
-                <span className="text-background font-semibold text-sm">
+              <div className="w-8 h-8 bg-accent-primary/15 border border-accent-primary/30 rounded-full flex items-center justify-center">
+                <span className="text-accent-primary font-bold text-sm font-display">
                   {user?.fullName.charAt(0).toUpperCase()}
                 </span>
               </div>

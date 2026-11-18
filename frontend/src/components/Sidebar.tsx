@@ -126,12 +126,12 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
       >
         <div className="flex flex-col h-full">
           {/* Logo (mobile) */}
-          <div className="flex items-center justify-between h-16 px-6 border-b border-border md:hidden">
+          <div className="flex items-center justify-between h-12 px-6 border-b border-border md:hidden">
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 flex items-center justify-center">
+              <div className="w-7 h-7 flex items-center justify-center">
                 <img src="/logo.svg" alt="KAMCORP Logo" className="w-full h-full object-contain" />
               </div>
-              <h1 className="text-xl font-display font-semibold text-gradient">
+              <h1 className="text-xl font-display font-bold text-gradient tracking-tight">
                 KAMCORP
               </h1>
             </div>
@@ -146,15 +146,15 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
           </div>
 
           {/* Navigation */}
-          <nav className="flex-1 overflow-y-auto custom-scrollbar py-6 px-4">
+          <nav className="flex-1 overflow-y-auto custom-scrollbar py-3 px-3">
             <div className="space-y-1">
               {filteredNavItems.map((item) => (
                 <Link key={item.path} href={item.path} passHref legacyBehavior>
                   <motion.a
-                    className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all cursor-pointer ${
+                    className={`flex items-center gap-3 px-3 py-2 rounded-lg transition-all cursor-pointer relative text-sm ${
                       isActivePath(item.path)
-                        ? 'bg-accent-primary text-background font-medium shadow-glow-primary'
-                        : 'text-text-secondary hover:text-text-primary hover:bg-surface-hover'
+                        ? 'bg-accent-primary/10 text-accent-primary font-semibold border border-accent-primary/20 shadow-glow-primary'
+                        : 'text-text-secondary hover:text-text-primary hover:bg-surface-hover border border-transparent'
                     }`}
                     whileHover={{ x: 4 }}
                     whileTap={{ scale: 0.98 }}
@@ -169,18 +169,18 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
           </nav>
 
           {/* User info (bottom) */}
-          <div className="p-4 border-t border-border">
-            <div className="flex items-center gap-3 px-3 py-2 rounded-xl bg-background">
-              <div className="w-10 h-10 bg-accent-secondary rounded-full flex items-center justify-center">
-                <span className="text-background font-semibold">
+          <div className="p-3 border-t border-border">
+            <div className="flex items-center gap-3 px-3 py-2 rounded-lg bg-background">
+              <div className="w-7 h-7 bg-accent-primary/20 border border-accent-primary/30 rounded-full flex items-center justify-center">
+                <span className="text-accent-primary font-semibold font-display text-xs">
                   {user?.fullName.charAt(0).toUpperCase()}
                 </span>
               </div>
               <div className="flex-1 min-w-0">
-                <p className="text-sm font-medium text-text-primary truncate">
+                <p className="text-xs font-semibold text-text-primary truncate">
                   {user?.fullName}
                 </p>
-                <p className="text-xs text-text-secondary capitalize">
+                <p className="text-xs text-text-tertiary capitalize">
                   {user?.role}
                 </p>
               </div>

@@ -49,7 +49,7 @@ export default function Layout({ children }: LayoutProps) {
         <Navbar onMenuClick={() => setSidebarOpen(true)} />
         
         <main className="flex-1 overflow-y-auto custom-scrollbar">
-          <div className="container mx-auto px-4 py-6 md:px-6 lg:px-8">
+          <div className="container mx-auto px-4 py-4 md:px-6 lg:px-8">
             {children}
           </div>
         </main>

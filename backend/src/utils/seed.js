@@ -23,7 +23,7 @@ const seedData = async () => {
 
     const users = await User.create([
       {
-        email: 'admin@kamcorp.co.tz',
+        email: 'kamautomotive.tz@gmail.com',
         fullName: 'Admin User',
         passwordHash: defaultPassword,
         role: 'admin'
@@ -135,7 +135,7 @@ const seedData = async () => {
 
     console.log('\n✨ Database seeded successfully!');
     console.log('\n📋 Login credentials:');
-    console.log('   Admin: admin@kamcorp.co.tz / kamcorp123');
+    console.log('   Admin: kamautomotive.tz@gmail.com / kamcorp123');
     console.log('   Sales: sales@kamcorp.co.tz / kamcorp123');
     console.log('   Stock: stock@kamcorp.co.tz / kamcorp123');
 

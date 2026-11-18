@@ -120,13 +120,13 @@ export default function Dashboard() {
   ];
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-5">
       {/* Header */}
       <div>
-        <h1 className="text-3xl font-display font-bold text-gradient mb-2">
-          Welcome back, {user?.fullName}!
+        <h1 className="text-xl font-display font-bold text-gradient mb-1">
+          Welcome back, {user?.fullName}
         </h1>
-        <p className="text-text-secondary">
+        <p className="text-sm text-text-secondary">
           Here's what's happening with your business today.
         </p>
       </div>
@@ -135,7 +135,7 @@ export default function Dashboard() {
       <NotificationSettings />
 
       {/* Stats Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         {stats.map((stat, index) => (
           <motion.div
             key={stat.title}

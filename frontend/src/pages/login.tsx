@@ -85,7 +85,7 @@ export default function Login() {
       <div 
         className="absolute inset-0 opacity-5"
         style={{
-          backgroundImage: "radial-gradient(circle, #9333ea 1px, transparent 1px)",
+          backgroundImage: "radial-gradient(circle, #9aaad0 1px, transparent 1px)",
           backgroundSize: "50px 50px",
         }}
       />

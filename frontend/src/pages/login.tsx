@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { motion } from 'framer-motion';
 import { useAuth } from '@/hooks/useAuth';
-import Button from '@/components/Button';
 import Input from '@/components/Input';
 import api from '@/utils/api';
 import toast from 'react-hot-toast';
@@ -116,7 +115,8 @@ export default function Login() {
 
       {/* Right Panel — Form */}
       <motion.div
-        className="w-full lg:flex-1 flex flex-col justify-center px-8 sm:px-16 lg:px-20 bg-surface lg:-ml-12 relative z-10"
+        className="w-full lg:flex-1 flex flex-col justify-center px-8 sm:px-16 lg:px-20 lg:-ml-12 relative z-10"
+        style={{ background: '#eef1f8' }}
         initial={{ opacity: 0, x: 40 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.6, delay: 0.2 }}
@@ -130,13 +130,13 @@ export default function Login() {
 
         <div className="w-full max-w-sm mx-auto">
           <div className="mb-8">
-            <h2 className="text-2xl font-semibold text-text-primary mb-1">Welcome back</h2>
-            <p className="text-text-secondary text-sm">Sign in to your dashboard</p>
+            <h2 className="text-2xl font-semibold mb-1" style={{ color: '#0e1530' }}>Welcome back</h2>
+            <p className="text-sm" style={{ color: '#3a4a70' }}>Sign in to your dashboard</p>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-5">
             <div>
-              <label className="block text-xs font-semibold text-text-secondary uppercase tracking-wider mb-2">
+              <label className="block text-xs font-semibold uppercase tracking-wider mb-2" style={{ color: '#3a4a70' }}>
                 Email address
               </label>
               <Input
@@ -154,7 +154,7 @@ export default function Login() {
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-text-secondary uppercase tracking-wider mb-2">
+              <label className="block text-xs font-semibold uppercase tracking-wider mb-2" style={{ color: '#3a4a70' }}>
                 Password
               </label>
               <Input
@@ -171,14 +171,19 @@ export default function Login() {
               />
             </div>
 
-            <Button type="submit" variant="primary" loading={isLoading} fullWidth>
+            <button
+              type="submit"
+              disabled={isLoading}
+              className="w-full py-3 rounded-xl font-semibold text-white transition-all"
+              style={{ background: isLoading ? '#7888b0' : '#0e1530', fontSize: '15px' }}
+            >
               {isLoading ? 'Signing in...' : 'Sign in'}
-            </Button>
+            </button>
           </form>
 
           {/* Roles */}
-          <div className="mt-8 p-4 rounded-xl border border-border bg-background">
-            <p className="text-xs font-semibold text-text-secondary uppercase tracking-wider mb-3">User Roles</p>
+          <div className="mt-8 p-4 rounded-xl" style={{ background: '#dde3f0', border: '1px solid #c8d0e8' }}>
+            <p className="text-xs font-semibold uppercase tracking-wider mb-3" style={{ color: '#3a4a70' }}>User Roles</p>
             <div className="space-y-2">
               {[
                 { role: 'Admin', desc: 'Full system control & user management', color: '#9aaad0' },
@@ -196,7 +201,7 @@ export default function Login() {
             </div>
           </div>
 
-          <p className="text-center text-xs text-text-tertiary mt-8">
+          <p className="text-center text-xs mt-8" style={{ color: '#8090b8' }}>
             © 2025 KAMCORP. All rights reserved.
           </p>
         </div>

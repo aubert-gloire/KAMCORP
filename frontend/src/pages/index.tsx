@@ -46,15 +46,10 @@ export default function Home() {
           animate={{ scale: 1, opacity: 1 }}
           transition={{ delay: 0.2, duration: 0.6 }}
         >
-          <div className="w-70 h-70 rounded-2xl flex items-center justify-center mx-auto mb-6 relative">
-            <Image 
-              src="/logo.svg" 
-              alt="KAMCORP Logo" 
-              width={288} 
-              height={288}
-              priority
-              className="drop-shadow-2xl"
-            />
+          <div className="mb-6">
+            <h1 className="text-7xl font-display font-black tracking-widest text-text-primary drop-shadow-2xl">
+              KAM<span className="text-accent-primary">CORP</span>
+            </h1>
           </div>
           <h1 className="text-4xl lg:text-5xl font-display font-bold text-text-primary mb-3">
             Welcome to KAMCORP

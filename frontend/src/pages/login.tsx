@@ -104,11 +104,8 @@ export default function Login() {
             animate={{ scale: 1, opacity: 1 }}
             transition={{ delay: 0.2, duration: 0.5 }}
           >
-            <div className="w-64 h-64 mb-8">
-              <img src="/logo.svg" alt="KAMCORP Logo" className="w-full h-full object-contain" />
-            </div>
-            <h1 className="text-3xl font-display font-bold text-text-primary mb-2">
-              KAMCORP
+            <h1 className="text-5xl font-display font-black tracking-widest text-text-primary mb-2">
+              KAM<span className="text-accent-primary">CORP</span>
             </h1>
             <p className="text-text-secondary text-base">
               Accounting & Inventory Management
@@ -198,11 +195,8 @@ export default function Login() {
             animate={{ scale: 1, opacity: 1 }}
             transition={{ delay: 0.2, duration: 0.5 }}
           >
-            <div className="w-40 h-40 mx-auto mb-5">
-              <img src="/logo.svg" alt="KAMCORP Logo" className="w-full h-full object-contain" />
-            </div>
-            <h1 className="text-2xl font-display font-bold text-text-primary mb-1">
-              KAMCORP
+            <h1 className="text-4xl font-display font-black tracking-widest text-text-primary mb-1">
+              KAM<span className="text-accent-primary">CORP</span>
             </h1>
             <p className="text-text-tertiary text-sm">Inventory Management</p>
           </motion.div>

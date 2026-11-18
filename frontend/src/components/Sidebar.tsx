@@ -127,12 +127,9 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
         <div className="flex flex-col h-full">
           {/* Logo (mobile) */}
           <div className="flex items-center justify-between h-12 px-6 border-b border-border md:hidden">
-            <div className="flex items-center gap-3">
-              <div className="w-7 h-7 flex items-center justify-center">
-                <img src="/logo.svg" alt="KAMCORP Logo" className="w-full h-full object-contain" />
-              </div>
-              <h1 className="text-xl font-display font-bold text-gradient tracking-tight">
-                KAMCORP
+            <div className="flex items-center">
+              <h1 className="text-xl font-display font-black text-gradient tracking-widest">
+                KAM<span className="text-accent-primary">CORP</span>
               </h1>
             </div>
             <button

@@ -27,12 +27,9 @@ export default function Navbar({ onMenuClick }: NavbarProps) {
             </svg>
           </button>
           
-          <div className="flex items-center gap-3">
-            <div className="w-7 h-7 flex items-center justify-center">
-              <img src="/logo.svg" alt="KAMCORP Logo" className="w-full h-full object-contain" />
-            </div>
-            <h1 className="text-xl font-display font-bold text-gradient hidden sm:block tracking-tight">
-              KAMCORP
+          <div className="flex items-center">
+            <h1 className="text-xl font-display font-black text-gradient hidden sm:block tracking-widest">
+              KAM<span className="text-accent-primary">CORP</span>
             </h1>
           </div>
         </div>

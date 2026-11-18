@@ -45,18 +45,18 @@ export default function Login() {
 
   return (
     <div className="min-h-screen relative overflow-hidden">
-      {/* Background: dark left block */}
+      {/* Background: blue left block */}
       <div className="absolute inset-0 hidden lg:block" style={{
-        background: 'linear-gradient(145deg, #080c18 0%, #0e1530 60%, #131c3a 100%)',
+        background: 'linear-gradient(160deg, #0e1530 0%, #1a2a5e 50%, #0e1a40 100%)',
         clipPath: 'polygon(0 0, 57% 0, 47% 100%, 0 100%)',
       }} />
-      {/* Background: light right block */}
+      {/* Background: white right block */}
       <div className="absolute inset-0 hidden lg:block" style={{
-        background: '#eef1f8',
+        background: '#ffffff',
         clipPath: 'polygon(57% 0, 100% 0, 100% 100%, 47% 100%)',
       }} />
       {/* Mobile background */}
-      <div className="absolute inset-0 lg:hidden" style={{ background: '#eef1f8' }} />
+      <div className="absolute inset-0 lg:hidden" style={{ background: '#ffffff' }} />
 
       <div className="relative z-10 flex min-h-screen">
       {/* Left Panel — Branded */}
@@ -191,7 +191,7 @@ export default function Login() {
           </form>
 
           {/* Roles */}
-          <div className="mt-8 p-4 rounded-xl" style={{ background: '#dde3f0', border: '1px solid #c8d0e8' }}>
+          <div className="mt-8 p-4 rounded-xl" style={{ background: '#f4f6fb', border: '1px solid #dde3f0' }}>
             <p className="text-xs font-semibold uppercase tracking-wider mb-3" style={{ color: '#3a4a70' }}>User Roles</p>
             <div className="space-y-2">
               {[

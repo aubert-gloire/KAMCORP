@@ -44,14 +44,24 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen flex">
+    <div className="min-h-screen relative overflow-hidden">
+      {/* Background: dark left block */}
+      <div className="absolute inset-0 hidden lg:block" style={{
+        background: 'linear-gradient(145deg, #080c18 0%, #0e1530 60%, #131c3a 100%)',
+        clipPath: 'polygon(0 0, 57% 0, 47% 100%, 0 100%)',
+      }} />
+      {/* Background: light right block */}
+      <div className="absolute inset-0 hidden lg:block" style={{
+        background: '#eef1f8',
+        clipPath: 'polygon(57% 0, 100% 0, 100% 100%, 47% 100%)',
+      }} />
+      {/* Mobile background */}
+      <div className="absolute inset-0 lg:hidden" style={{ background: '#eef1f8' }} />
+
+      <div className="relative z-10 flex min-h-screen">
       {/* Left Panel — Branded */}
       <motion.div
-        className="hidden lg:flex lg:w-[55%] flex-col justify-between p-12 relative overflow-hidden flex-shrink-0"
-        style={{
-          background: 'linear-gradient(145deg, #080c18 0%, #0e1530 60%, #131c3a 100%)',
-          clipPath: 'polygon(0 0, 92% 0, 100% 100%, 0 100%)',
-        }}
+        className="hidden lg:flex lg:w-1/2 flex-col justify-between p-12 relative"
         initial={{ x: -60, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
         transition={{ duration: 0.7, ease: 'easeOut' }}
@@ -115,8 +125,7 @@ export default function Login() {
 
       {/* Right Panel — Form */}
       <motion.div
-        className="w-full lg:flex-1 flex flex-col justify-center px-8 sm:px-16 lg:px-20 lg:-ml-12 relative z-10"
-        style={{ background: '#eef1f8' }}
+        className="w-full lg:flex-1 flex flex-col justify-center px-8 sm:px-16 lg:px-20"
         initial={{ opacity: 0, x: 40 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.6, delay: 0.2 }}
@@ -206,6 +215,7 @@ export default function Login() {
           </p>
         </div>
       </motion.div>
+      </div>
     </div>
   );
 }

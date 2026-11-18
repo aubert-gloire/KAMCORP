@@ -80,10 +80,10 @@ export default function Home() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6, duration: 0.6 }}
         >
-          <Button 
-            variant="primary" 
+          <Button
+            variant="primary"
             onClick={() => router.push('/login')}
-            className="text-lg px-10 py-6"
+            className="text-lg px-10 py-6 shadow-lg shadow-accent-primary/30 ring-1 ring-accent-primary/40"
           >
             Get Started
           </Button>

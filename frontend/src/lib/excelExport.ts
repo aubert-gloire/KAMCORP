@@ -6,7 +6,7 @@ const headerStyle = {
   alignment: { vertical: 'middle' as const, horizontal: 'center' as const },
 };
 
-export const generateSalesExcel = async (sales: any[], _dateRange: string): Promise<ArrayBuffer> => {
+export const generateSalesExcel = async (sales: any[], _dateRange?: string): Promise<ArrayBuffer> => {
   const wb = new ExcelJS.Workbook();
   const ws = wb.addWorksheet('Sales Report');
   ws.columns = [
@@ -37,7 +37,7 @@ export const generateSalesExcel = async (sales: any[], _dateRange: string): Prom
   return wb.xlsx.writeBuffer();
 };
 
-export const generatePurchasesExcel = async (purchases: any[], _dateRange: string): Promise<ArrayBuffer> => {
+export const generatePurchasesExcel = async (purchases: any[], _dateRange?: string): Promise<ArrayBuffer> => {
   const wb = new ExcelJS.Workbook();
   const ws = wb.addWorksheet('Purchases Report');
   ws.columns = [

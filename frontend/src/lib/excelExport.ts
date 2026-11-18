@@ -6,7 +6,7 @@ const headerStyle = {
   alignment: { vertical: 'middle' as const, horizontal: 'center' as const },
 };
 
-export const generateSalesExcel = async (sales: any[], _dateRange: string): Promise<Buffer> => {
+export const generateSalesExcel = async (sales: any[], _dateRange: string): Promise<ArrayBuffer> => {
   const wb = new ExcelJS.Workbook();
   const ws = wb.addWorksheet('Sales Report');
   ws.columns = [
@@ -34,10 +34,10 @@ export const generateSalesExcel = async (sales: any[], _dateRange: string): Prom
   }));
   ws.getColumn('unitPrice').numFmt = '#,##0';
   ws.getColumn('totalPrice').numFmt = '#,##0';
-  return wb.xlsx.writeBuffer() as Promise<Buffer>;
+  return wb.xlsx.writeBuffer();
 };
 
-export const generatePurchasesExcel = async (purchases: any[], _dateRange: string): Promise<Buffer> => {
+export const generatePurchasesExcel = async (purchases: any[], _dateRange: string): Promise<ArrayBuffer> => {
   const wb = new ExcelJS.Workbook();
   const ws = wb.addWorksheet('Purchases Report');
   ws.columns = [
@@ -63,10 +63,10 @@ export const generatePurchasesExcel = async (purchases: any[], _dateRange: strin
   }));
   ws.getColumn('unitCost').numFmt = '#,##0';
   ws.getColumn('totalCost').numFmt = '#,##0';
-  return wb.xlsx.writeBuffer() as Promise<Buffer>;
+  return wb.xlsx.writeBuffer();
 };
 
-export const generateStockExcel = async (products: any[]): Promise<Buffer> => {
+export const generateStockExcel = async (products: any[]): Promise<ArrayBuffer> => {
   const wb = new ExcelJS.Workbook();
   const ws = wb.addWorksheet('Stock Report');
   ws.columns = [
@@ -98,10 +98,10 @@ export const generateStockExcel = async (products: any[]): Promise<Buffer> => {
   ws.getColumn('price').numFmt = '#,##0';
   ws.getColumn('costPrice').numFmt = '#,##0';
   ws.getColumn('stockValue').numFmt = '#,##0';
-  return wb.xlsx.writeBuffer() as Promise<Buffer>;
+  return wb.xlsx.writeBuffer();
 };
 
-export const generateExpensesExcel = async (expenses: any[]): Promise<Buffer> => {
+export const generateExpensesExcel = async (expenses: any[]): Promise<ArrayBuffer> => {
   const wb = new ExcelJS.Workbook();
   const ws = wb.addWorksheet('Expenses Report');
   ws.columns = [
@@ -122,5 +122,5 @@ export const generateExpensesExcel = async (expenses: any[]): Promise<Buffer> =>
     receipt: e.receiptNumber || '',
   }));
   ws.getColumn('amount').numFmt = '#,##0';
-  return wb.xlsx.writeBuffer() as Promise<Buffer>;
+  return wb.xlsx.writeBuffer();
 };

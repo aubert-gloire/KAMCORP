@@ -1,7 +1,7 @@
 import * as brevo from '@getbrevo/brevo';
 
 const brevoApiInstance = new brevo.TransactionalEmailsApi();
-(brevoApiInstance.authentications as any)['apiKey'].apiKey = process.env.BREVO_API_KEY;
+brevoApiInstance.setApiKey(brevo.TransactionalEmailsApiApiKeys.apiKey, process.env.BREVO_API_KEY || '');
 
 const isBrevoConfigured = !!process.env.BREVO_API_KEY;
 const senderEmail = process.env.BREVO_SENDER_EMAIL || 'noreply@kamcorp.com';

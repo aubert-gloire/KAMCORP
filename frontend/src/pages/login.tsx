@@ -48,8 +48,11 @@ export default function Login() {
     <div className="min-h-screen flex">
       {/* Left Panel — Branded */}
       <motion.div
-        className="hidden lg:flex lg:w-1/2 flex-col justify-between p-12 relative overflow-hidden"
-        style={{ background: 'linear-gradient(145deg, #080c18 0%, #0e1530 60%, #131c3a 100%)' }}
+        className="hidden lg:flex lg:w-[55%] flex-col justify-between p-12 relative overflow-hidden flex-shrink-0"
+        style={{
+          background: 'linear-gradient(145deg, #080c18 0%, #0e1530 60%, #131c3a 100%)',
+          clipPath: 'polygon(0 0, 92% 0, 100% 100%, 0 100%)',
+        }}
         initial={{ x: -60, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
         transition={{ duration: 0.7, ease: 'easeOut' }}
@@ -113,7 +116,7 @@ export default function Login() {
 
       {/* Right Panel — Form */}
       <motion.div
-        className="w-full lg:w-1/2 flex flex-col justify-center px-8 sm:px-16 lg:px-20 bg-surface"
+        className="w-full lg:flex-1 flex flex-col justify-center px-8 sm:px-16 lg:px-20 bg-surface lg:-ml-12 relative z-10"
         initial={{ opacity: 0, x: 40 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.6, delay: 0.2 }}

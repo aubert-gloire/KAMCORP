@@ -29,7 +29,7 @@ export default function Navbar({ onMenuClick }: NavbarProps) {
           
           <div className="flex items-center">
             <h1 className="text-xl font-display font-black text-gradient hidden sm:block tracking-widest">
-              KAM<span className="text-accent-primary">CORP</span>
+              KAM <span className="text-accent-primary">CORP</span>
             </h1>
           </div>
         </div>

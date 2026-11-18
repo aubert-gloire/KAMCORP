@@ -121,7 +121,7 @@ export default function Verify2FA() {
         {/* Logo */}
         <div className="text-center mb-6 sm:mb-8">
           <div className="mb-3 sm:mb-4">
-            <span className="text-2xl font-display font-black tracking-widest text-text-primary">KAM<span className="text-accent-primary">CORP</span></span>
+            <span className="text-2xl font-display font-black tracking-widest text-text-primary">KAM <span className="text-accent-primary">CORP</span></span>
           </div>
           <h1 className="text-xl sm:text-2xl font-display font-bold text-text-primary mb-2 px-4">
             Two-Factor Authentication

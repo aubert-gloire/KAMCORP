@@ -44,24 +44,18 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen relative overflow-hidden">
-      {/* Background: blue left block */}
+    <div className="min-h-screen relative overflow-hidden" style={{ background: '#ffffff' }}>
+      {/* Blue left diagonal — clip-path cuts the diagonal edge */}
       <div className="absolute inset-0 hidden lg:block" style={{
         background: 'linear-gradient(160deg, #0e1530 0%, #1a2a5e 50%, #0e1a40 100%)',
-        clipPath: 'polygon(0 0, 57% 0, 47% 100%, 0 100%)',
+        clipPath: 'polygon(0 0, 65% 0, 35% 100%, 0 100%)',
       }} />
-      {/* Background: white right block */}
-      <div className="absolute inset-0 hidden lg:block" style={{
-        background: '#ffffff',
-        clipPath: 'polygon(57% 0, 100% 0, 100% 100%, 47% 100%)',
-      }} />
-      {/* Mobile background */}
-      <div className="absolute inset-0 lg:hidden" style={{ background: '#ffffff' }} />
 
       <div className="relative z-10 flex min-h-screen">
       {/* Left Panel — Branded */}
       <motion.div
         className="hidden lg:flex lg:w-1/2 flex-col justify-between p-12 relative"
+        style={{ background: 'transparent' }}
         initial={{ x: -60, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
         transition={{ duration: 0.7, ease: 'easeOut' }}
@@ -73,11 +67,8 @@ export default function Login() {
         {/* Top — Wordmark */}
         <div>
           <h1 className="text-4xl font-display font-black tracking-widest text-white">
-            KAM<span style={{ color: '#9aaad0' }}>CORP</span>
+            KAM <span style={{ color: '#9aaad0' }}>CORP</span>
           </h1>
-          <p className="text-sm tracking-widest uppercase mt-1" style={{ color: '#9aaad0', opacity: 0.7 }}>
-            Track · Manage · Grow
-          </p>
         </div>
 
         {/* Middle — Headline + Features */}
@@ -94,9 +85,18 @@ export default function Login() {
 
           <div className="space-y-5">
             {[
-              { icon: '📊', text: 'Track every product in real-time' },
-              { icon: '💰', text: 'See profit on every sale instantly' },
-              { icon: '🔐', text: 'Manage staff with role-based access' },
+              {
+                icon: <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>,
+                text: 'Track every product in real-time'
+              },
+              {
+                icon: <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>,
+                text: 'See profit on every sale instantly'
+              },
+              {
+                icon: <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" /></svg>,
+                text: 'Manage staff with role-based access'
+              },
             ].map((item, i) => (
               <motion.div
                 key={i}
@@ -105,8 +105,7 @@ export default function Login() {
                 animate={{ x: 0, opacity: 1 }}
                 transition={{ delay: 0.3 + i * 0.1 }}
               >
-                <div className="w-10 h-10 rounded-lg flex items-center justify-center text-lg flex-shrink-0"
-                  style={{ background: 'rgba(154,170,208,0.1)', border: '1px solid rgba(154,170,208,0.2)' }}>
+                <div className="w-8 h-8 flex items-center justify-center flex-shrink-0" style={{ color: 'rgba(154,170,208,0.6)' }}>
                   {item.icon}
                 </div>
                 <span className="text-sm font-medium" style={{ color: 'rgba(192,200,224,0.85)' }}>
@@ -126,6 +125,7 @@ export default function Login() {
       {/* Right Panel — Form */}
       <motion.div
         className="w-full lg:flex-1 flex flex-col justify-center px-8 sm:px-16 lg:px-20"
+        style={{ background: 'transparent' }}
         initial={{ opacity: 0, x: 40 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.6, delay: 0.2 }}
@@ -154,6 +154,7 @@ export default function Login() {
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="you@example.com"
                 required
+                className="!bg-white !border-[#dde3f0] !text-[#0e1530] placeholder:!text-[#aab0c8] focus:!border-[#9aaad0]"
                 icon={
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207" />
@@ -172,6 +173,7 @@ export default function Login() {
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"
                 required
+                className="!bg-white !border-[#dde3f0] !text-[#0e1530] placeholder:!text-[#aab0c8] focus:!border-[#9aaad0]"
                 icon={
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
@@ -189,26 +191,6 @@ export default function Login() {
               {isLoading ? 'Signing in...' : 'Sign in'}
             </button>
           </form>
-
-          {/* Roles */}
-          <div className="mt-8 p-4 rounded-xl" style={{ background: '#f4f6fb', border: '1px solid #dde3f0' }}>
-            <p className="text-xs font-semibold uppercase tracking-wider mb-3" style={{ color: '#3a4a70' }}>User Roles</p>
-            <div className="space-y-2">
-              {[
-                { role: 'Admin', desc: 'Full system control & user management', color: '#9aaad0' },
-                { role: 'Sales', desc: 'Record sales & view reports', color: '#50c88c' },
-                { role: 'Stock', desc: 'Manage inventory & purchases', color: '#50c88c' },
-              ].map((r, i) => (
-                <div key={i} className="flex items-start gap-2.5">
-                  <span className="w-1.5 h-1.5 rounded-full mt-1.5 flex-shrink-0" style={{ background: r.color }} />
-                  <div>
-                    <span className="text-xs font-semibold block" style={{ color: r.color }}>{r.role}</span>
-                    <span className="text-xs text-text-tertiary">{r.desc}</span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
 
           <p className="text-center text-xs mt-8" style={{ color: '#8090b8' }}>
             © 2025 KAMCORP. All rights reserved.

@@ -84,7 +84,7 @@ export default function Expenses() {
   const [dateRange, setDateRange] = useState<'7days' | '30days' | '90days' | 'all'>('30days');
 
   const [formData, setFormData] = useState({
-    category: 'transport',
+    category: '',
     amount: '',
     description: '',
     date: new Date().toISOString().split('T')[0],
@@ -146,6 +146,15 @@ export default function Expenses() {
     },
   });
 
+  // Fetch distinct expense categories
+  const { data: expenseCategories = [] } = useQuery<string[]>({
+    queryKey: ['expense-categories'],
+    queryFn: async () => {
+      const response = await api.get('/expenses/categories');
+      return response.data?.data || [];
+    },
+  });
+
   // Create expense mutation
   const createMutation = useMutation({
     mutationFn: async (data: typeof formData) => {
@@ -155,6 +164,7 @@ export default function Expenses() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['expenses'] });
       queryClient.invalidateQueries({ queryKey: ['expense-stats'] });
+      queryClient.invalidateQueries({ queryKey: ['expense-categories'] });
       toast.success('Expense created successfully!');
       setShowModal(false);
       resetForm();
@@ -201,7 +211,7 @@ export default function Expenses() {
 
   const resetForm = () => {
     setFormData({
-      category: 'transport',
+      category: '',
       amount: '',
       description: '',
       date: new Date().toISOString().split('T')[0],
@@ -274,10 +284,8 @@ export default function Expenses() {
                   className="w-full px-4 py-2 rounded-lg border border-border bg-surface text-text-primary focus:ring-2 focus:ring-accent-primary focus:border-transparent"
                 >
                   <option value="">All Categories</option>
-                  {CATEGORY_OPTIONS.map((cat) => (
-                    <option key={cat.value} value={cat.value}>
-                      {cat.icon} {cat.label}
-                    </option>
+                  {expenseCategories.map((cat) => (
+                    <option key={cat} value={cat}>{cat}</option>
                   ))}
                 </select>
               </div>
@@ -544,18 +552,19 @@ export default function Expenses() {
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label className="block text-sm font-medium text-text-secondary mb-2">Category</label>
-            <select
+            <input
+              list="expense-category-suggestions"
               value={formData.category}
               onChange={(e) => setFormData({ ...formData, category: e.target.value })}
+              placeholder="e.g., Fuel, Rent, Salaries..."
               className="w-full px-4 py-2 rounded-lg border border-border bg-surface text-text-primary focus:ring-2 focus:ring-accent-primary focus:border-transparent"
               required
-            >
-              {CATEGORY_OPTIONS.map((cat) => (
-                <option key={cat.value} value={cat.value}>
-                  {cat.icon} {cat.label}
-                </option>
+            />
+            <datalist id="expense-category-suggestions">
+              {expenseCategories.map((cat) => (
+                <option key={cat} value={cat} />
               ))}
-            </select>
+            </datalist>
           </div>
 
           <div>

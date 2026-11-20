@@ -396,25 +396,23 @@ export default function Products() {
             placeholder="e.g., PROD001"
           />
 
-          <Select
-            label="Category"
-            name="category"
-            value={formData.category || ''}
-            onChange={handleChange}
-            error={errors.category}
-          >
-            <option value="">Select category</option>
-            {categories.map((category) => (
-              <option key={category} value={category}>
-                {category}
-              </option>
-            ))}
-            <option value="Electronics">Electronics</option>
-            <option value="Clothing">Clothing</option>
-            <option value="Food">Food</option>
-            <option value="Furniture">Furniture</option>
-            <option value="Other">Other</option>
-          </Select>
+          <div className="w-full">
+            <label className="label">Category</label>
+            <input
+              list="category-suggestions"
+              name="category"
+              value={formData.category || ''}
+              onChange={handleChange}
+              placeholder="e.g., Spare Parts, Tyres, Lubricants..."
+              className={`input ${errors.category ? 'input-error' : ''}`}
+            />
+            <datalist id="category-suggestions">
+              {categories.map((cat) => (
+                <option key={cat} value={cat} />
+              ))}
+            </datalist>
+            {errors.category && <p className="text-sm text-error mt-1.5">{errors.category}</p>}
+          </div>
 
           <Textarea
             label="Description"
